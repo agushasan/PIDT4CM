@@ -97,9 +97,9 @@ Pv      = 0.001*eye(n);
 Pt      = 0.001*eye(r);
 Gamma   = zeros(n,r);
 
-Pplus       = 10000000*eye(n);
+Pplus       = 1*eye(n);
 QF          = 0.0001*eye(n);
-RF          = 100000*eye(n);
+RF          = 100*eye(n);
 a           = 0.999;
 UpsilonPlus = 0*zeros(n,r);
 S           = 1*eye(r);
@@ -184,127 +184,159 @@ Temp2hat = inv([-dt*m23/mt dt*m33/mt;dt*m22/mt -dt*m32/mt])*[thetahatArray(8,:);
 
 figure(1)
 subplot(3,1,1)
-plot(t,yArray(1,:), 'r', 'LineWidth', 6)
+plot(t,yArray(1,:), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),vhatArray(1,1:100:end), 'g--', 'LineWidth', 6)
+plot(t(1:100:end),vhatArray(1,1:100:end), 'g--', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),vbarArray(1,1:100:end), 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),vbarArray(1,1:100:end), 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
-ylabel('u [m/s]','FontSize',48)
+ylabel('$u [m/s]$','Interpreter','latex','FontSize',48)
 subplot(3,1,2)
-plot(t,yArray(2,:), 'r', 'LineWidth', 6)
+plot(t,yArray(2,:), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),vhatArray(2,1:100:end), 'g--', 'LineWidth', 6)
+plot(t(1:100:end),vhatArray(2,1:100:end), 'g--', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),vbarArray(2,1:100:end), 'b:', 'LineWidth', 6)
+plot(t(1:100:end),vbarArray(2,1:100:end), 'b:', 'LineWidth', 12)
 grid on;
 grid minor;
-set(gca,'FontSize',36)
-ylabel('v [m/s]','FontSize',48)
+set(gca,'LineWidth',2,'FontSize',36)
+ylabel('$v [m/s]$','Interpreter','latex','FontSize',48)
 subplot(3,1,3)
-plot(t,yArray(3,:), 'r', 'LineWidth', 6)
+plot(t,yArray(3,:), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),vhatArray(3,1:100:end), 'g--', 'LineWidth', 6)
+plot(t(1:100:end),vhatArray(3,1:100:end), 'g--', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),vbarArray(3,1:100:end), 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),vbarArray(3,1:100:end), 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
-ylabel('r [rad/s]','FontSize',48)
-xlabel('time (s)','FontSize',48)
+ylabel('$r [rad/s]$','Interpreter','latex','FontSize',48)
+xlabel('$t (s)$','Interpreter','latex','FontSize',48)
 legend('measured','estimated AEKF','estimated AO','FontSize',48)
 
 figure(2)
 subplot(4,2,1)
-plot(t,Xu*ones(length(t),1), 'r', 'LineWidth', 6)
+plot(t,Xu*ones(length(t),1), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),m11*thetahatArray(3,1:100:end)/dt, 'g:', 'LineWidth', 6)
+plot(t(1:100:end),m11*thetahatArray(3,1:100:end)/dt, 'g:', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),m11*thetabarArray(3,1:100:end)/dt, 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),m11*thetabarArray(3,1:100:end)/dt, 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
 ylim([Xu-4 Xu+4]);
-ylabel('X_u','FontSize',48)
+ylabel('$X_u$','Interpreter','latex','FontSize',48)
 subplot(4,2,2)
-plot(t,Xuu*ones(length(t),1), 'r', 'LineWidth', 6)
+plot(t,Xuu*ones(length(t),1), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),m11*thetahatArray(4,1:100:end)/dt, ':g', 'LineWidth', 6)
+plot(t(1:100:end),m11*thetahatArray(4,1:100:end)/dt, ':g', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),m11*thetabarArray(4,1:100:end)/dt, 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),m11*thetabarArray(4,1:100:end)/dt, 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
-ylabel('X_{uu}','FontSize',48)
+ylabel('$X_{uu}$','Interpreter','latex','FontSize',48)
 legend('true parameter','estimated AEKF','estimated AO','FontSize',36)
 ylim([Xuu-4 Xuu+4]);
 subplot(4,2,3)
-plot(t,Nv*ones(length(t),1), 'r', 'LineWidth', 6)
+plot(t,Nv*ones(length(t),1), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),Temp1hat(1,1:100:end), ':g', 'LineWidth', 6)
+plot(t(1:100:end),Temp1hat(1,1:100:end), ':g', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),Temp1bar(1,1:100:end), 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),Temp1bar(1,1:100:end), 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
 ylim([Nv-4 Nv+4]);
-ylabel('N_v','FontSize',48)
+ylabel('$N_v$','Interpreter','latex','FontSize',48)
 subplot(4,2,4)
-plot(t,Yv*ones(length(t),1), 'r', 'LineWidth', 6)
+plot(t,Yv*ones(length(t),1), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),Temp1hat(2,1:100:end), ':g', 'LineWidth', 6)
+plot(t(1:100:end),Temp1hat(2,1:100:end), ':g', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),Temp1bar(2,1:100:end), 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),Temp1bar(2,1:100:end), 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
-ylabel('Y_v','FontSize',48)
+ylabel('$Y_v$','Interpreter','latex','FontSize',48)
 ylim([Yv-4 Yv+4]);
 subplot(4,2,5)
-plot(t,Nr*ones(length(t),1), 'r', 'LineWidth', 6)
+plot(t,Nr*ones(length(t),1), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),Temp2hat(1,1:100:end), ':g', 'LineWidth', 6)
+plot(t(1:100:end),Temp2hat(1,1:100:end), ':g', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),Temp2bar(1,1:100:end), 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),Temp2bar(1,1:100:end), 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
 ylim([Nr-4 Nr+4]);
-ylabel('N_r','FontSize',48)
+ylabel('$N_r$','Interpreter','latex','FontSize',48)
 subplot(4,2,6)
-plot(t,Yr*ones(length(t),1), 'r', 'LineWidth', 6)
+plot(t,Yr*ones(length(t),1), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),Temp2hat(2,1:100:end), ':g', 'LineWidth', 6)
+plot(t(1:100:end),Temp2hat(2,1:100:end), ':g', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),Temp2bar(2,1:100:end), 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),Temp2bar(2,1:100:end), 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
-ylabel('Y_r','FontSize',48)
+ylabel('$Y_r$','Interpreter','latex','FontSize',48)
 ylim([Yr-4 Yr+4]);
 subplot(4,2,7)
-plot(t,Yvv*ones(length(t),1), 'r', 'LineWidth', 6)
+plot(t,Yvv*ones(length(t),1), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),mt*thetahatArray(9,1:100:end)/(dt*m33), ':g', 'LineWidth', 6)
+plot(t(1:100:end),mt*thetahatArray(9,1:100:end)/(dt*m33), ':g', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),mt*thetabarArray(9,1:100:end)/(dt*m33), 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),mt*thetabarArray(9,1:100:end)/(dt*m33), 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
-xlabel('time (s)','FontSize',48)
+xlabel('$t (s)$','Interpreter','latex','FontSize',48)
 ylim([Yvv-4 Yvv+4]);
-ylabel('Y_{vv}','FontSize',48)
+ylabel('$Y_{vv}$','Interpreter','latex','FontSize',48)
 subplot(4,2,8)
-plot(t,Nrr*ones(length(t),1), 'r', 'LineWidth', 6)
+plot(t,Nrr*ones(length(t),1), 'r', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),-mt*thetahatArray(10,1:100:end)/(dt*m23), ':g', 'LineWidth', 6)
+plot(t(1:100:end),-mt*thetahatArray(10,1:100:end)/(dt*m23), ':g', 'LineWidth', 12)
 hold on;
-plot(t(1:100:end),-mt*thetabarArray(10,1:100:end)/(dt*m23), 'b:', 'LineWidth', 6)
-set(gca,'FontSize',36)
+plot(t(1:100:end),-mt*thetabarArray(10,1:100:end)/(dt*m23), 'b:', 'LineWidth', 12)
+set(gca,'LineWidth',2,'FontSize',36)
 grid on;
 grid minor;
-ylabel('N_{rr}','FontSize',48)
-xlabel('time (s)','FontSize',48)
+ylabel('$N_{rr}$','Interpreter','latex','FontSize',48)
+xlabel('$t (s)$','Interpreter','latex','FontSize',48)
 ylim([Nrr-4 Nrr+4]);
+
+Xuhat  = m11*thetahatArray(3,end)/dt
+Xuuhat = m11*thetahatArray(4,end)/dt
+Nvhat  = Temp1hat(1,end)
+Yvhat  = Temp1hat(2,end)
+Nrhat  = Temp2hat(1,end)
+Yrhat  = Temp2hat(2,end)
+Yvvhat = mt*thetahatArray(9,end)/(dt*m33)
+Nrrhat = -mt*thetahatArray(10,end)/(dt*m23)
+
+Xubar  = m11*thetabarArray(3,end)/dt
+Xuubar = m11*thetabarArray(4,end)/dt
+Nvbar  = Temp1bar(1,end)
+Yvbar  = Temp1bar(2,end)
+Nrbar  = Temp2bar(1,end)
+Yrbar  = Temp2bar(2,end)
+Yvvbar = mt*thetabarArray(9,end)/(dt*m33)
+Nrrbar = -mt*thetabarArray(10,end)/(dt*m23)
+
+XuSBI  = -1.005;
+XuuSBI = -1.046;
+NvSBI  = 0.13032;
+YvSBI  = -0.6448;
+NrSBI  = -0.5026;
+YrSBI  = 0.0233;
+YvvSBI = -36.6814;
+NrrSBI = -0.8858;
+
+
+RMSEhat = sqrt((1/8)*((Xu-Xuhat)^2+(Xuu-Xuuhat)^2+(Nv-Nvhat)^2+(Yv-Yvhat)^2)+(Nr-Nrhat)^2+(Yr-Yrhat)^2+(Yvv-Yvvhat)^2+(Nrr-Nrrhat)^2)
+RMSEbar = sqrt((1/8)*((Xu-Xubar)^2+(Xuu-Xuubar)^2+(Nv-Nvbar)^2+(Yv-Yvbar)^2)+(Nr-Nrbar)^2+(Yr-Yrbar)^2+(Yvv-Yvvbar)^2+(Nrr-Nrrbar)^2)
+RMSESBI = sqrt((1/8)*((Xu-XuSBI)^2+(Xuu-XuuSBI)^2+(Nv-NvSBI)^2+(Yv-YvSBI)^2)+(Nr-NrSBI)^2+(Yr-YrSBI)^2+(Yvv-YvvSBI)^2+(Nrr-NrrSBI)^2)
